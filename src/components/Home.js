@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 //import { NavLink } from 'react-router-dom';
 import '../css/home.css';
 
+
 export default class Home extends Component{
     constructor(props){
         super(props);
@@ -28,6 +29,14 @@ export default class Home extends Component{
                        <li className={this.state.curTab==='二次元' ? 'nav-active' : ''}>二次元</li>
                        <li className={this.state.curTab==='潮人范' ? 'nav-active' : ''}>潮人范</li>
                    </ul>
+                </div>
+                <div className="banner">
+                    <div className="turn">
+                        <div className="turnBanner banner-active"></div>
+                        <div className="turnBanner"></div>
+                        <div className="turnBanner"></div>
+                        <div className="turnBanner"></div>
+                    </div>
                 </div>
 
             </div>
