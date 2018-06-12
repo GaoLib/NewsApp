@@ -1,0 +1,32 @@
+.nav {
+  width: 90%;
+  padding: 0;
+  overflow: auto;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between; }
+  li {
+    padding: 4px 10px;
+    list-style-type: none;
+    flex: 1 0 auto; }
+
+  .nav-active {
+    position: relative;
+    font-weight: bold; }
+    .nav-active:after {
+      content: '';
+      width: 60%;
+      height: 2px;
+      background-color: #f8ce00;
+      position: absolute;
+      left: 20%;
+      bottom: 0; }
+
+.arrow-down {
+  position: fixed;
+  right: 0px;
+  top: 16px;
+  background: white;
+  padding: 4px 10px; }
+
+/*# sourceMappingURL=home.css.map */
