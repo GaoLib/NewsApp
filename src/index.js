@@ -1,16 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter,Route,Switch } from 'react-router-dom';
-import './css/index.css';
-import App from './App';
-import Account from './components/Account';
-import registerServiceWorker from './registerServiceWorker';
-
+import  { GlobalIconStyle } from './style'
+import Account from './components/account/index';
+import Home from './components/home'
 
 ReactDOM.render(<BrowserRouter>
-    <Switch>
-    <Route path="/" exact component={App}/>
-        <Route path="/account" exact component={Account}/>
-    </Switch>
+    <div>
+        <Switch>
+            <Route path="/" exact component={Home}/>
+            <Route path="/account" exact component={Account}/>
+        </Switch>
+        <GlobalIconStyle />
+    </div>
 </BrowserRouter>, document.getElementById('root'));
-registerServiceWorker();
+
