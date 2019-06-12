@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import banner from '../../images/banner.jpg'
+// import banner from '../../images/banner.jpg'
 
 export const NavWrapper = styled.ul`
     width: 90%;
@@ -28,37 +28,46 @@ export const NavWrapper = styled.ul`
             bottom:0;
         }
     }
+    &::-webkit-scrollbar {
+        width: 100%;
+        height: 0.2vmin;
+    }
 `
 
 export const NavArrow = styled.div`
     position:fixed;
-    right:0px;
+    right:0;
     top:16px;
     background: white;
     padding:4px 10px;
 `
 
 export const Banner = styled.div`
-    width:100%;
-    height:160px;
-    background: url(${banner});
+    width: 100%;
+    height: 30vh;
+    background: url(${props=>props.imageUrl});
     background-size: 100% 100%;
     position:relative;
+`
 
-    .turn{
-      position:absolute;
-      bottom:14px;
-      right:14px;
+export const Turn = styled.div`
+    position: absolute;
+    bottom: 4vmin;
+    right: 4vmin;
 
-    .turnBanner{
-        width:6px;
-        height:6px;
-        background-color: white;
-        float:left;
-        margin:2px 4px;
-      }
-      .banner-active{
+    .banner-active{
         background-color: rgb(248,206,0);
-      }
+        width: 2.4vmin;
+        height: 2.4vmin;
+        margin-top: -0.14vmin;
     }
+`
+
+export const TurnBanner = styled.div`
+    width: 2vmin;
+    height: 2vmin;
+    background-color: white;
+    float: left;
+    margin: 0 0.6vmin;
+    vertical-align: middle;
 `
