@@ -4,14 +4,18 @@ import { BrowserRouter,Route,Switch } from 'react-router-dom';
 import  { GlobalIconStyle } from './style'
 import Account from './components/account/index';
 import Home from './components/home'
+import store from './store'
+import { Provider } from 'react-redux'
 
-ReactDOM.render(<BrowserRouter>
-    <div>
-        <Switch>
-            <Route path="/" exact component={Home}/>
-            <Route path="/account" exact component={Account}/>
-        </Switch>
+ReactDOM.render(
+    <Provider store={store}>
+        <BrowserRouter>
+            <Switch>
+                <Route path="/" exact component={Home}/>
+                <Route path="/account" exact component={Account}/>
+            </Switch>
+        </BrowserRouter>
         <GlobalIconStyle />
-    </div>
-</BrowserRouter>, document.getElementById('root'));
+    </Provider>
+, document.getElementById('root'));
 

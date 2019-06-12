@@ -1,0 +1,1 @@
+export const CHOOSE_TAB = 'home/choose_tab'

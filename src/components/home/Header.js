@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { NavWrapper, NavArrow} from './style'
+import { connect } from 'react-redux'
+import { actionCreators } from './store'
 
-export default class Header extends Component{
+class Header extends Component{
   
     render(){
         const {curTab,tabList,chooseTab} = this.props
@@ -9,9 +11,11 @@ export default class Header extends Component{
             <div>
                 <div>
                     <NavArrow>\/</NavArrow>
-                    <NavWrapper onClick={chooseTab}>
+                    <NavWrapper>
                        { tabList.map(tab=>{
-                            return <li className={curTab===tab ? 'nav-active' : ''}>{ tab }</li>
+                            return <li className={curTab===tab.id ? 'nav-active' : ''} 
+                            key={tab.id} 
+                            onClick={()=>chooseTab(tab.id)}>{ tab.name }</li>
                         }) }
                    </NavWrapper>
                 </div>
@@ -20,3 +24,20 @@ export default class Header extends Component{
     }
 
 }
+
+const mapState = (state)=>{
+    return {
+        curTab: state.home.curTab,
+        tabList: state.home.tabList
+    }
+}
+
+const mapDispatch = (dispatch)=>{
+    return {
+        chooseTab(id){
+            dispatch(actionCreators.chooseTab(id))
+        }
+    }
+}
+
+export default connect(mapState,mapDispatch)(Header)
