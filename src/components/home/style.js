@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-// import banner from '../../images/banner.jpg'
 
 export const NavWrapper = styled.ul`
     width: 90%;
@@ -42,9 +41,13 @@ export const NavArrow = styled.div`
     padding:4px 10px;
 `
 
+export const BodyWrapper = styled.div`
+    margin-bottom: 12vmin;
+`
+
 export const Banner = styled.div`
     width: 100%;
-    height: 30vh;
+    height: 24vh;
     background: url(${props=>props.imageUrl});
     background-size: 100% 100%;
     position:relative;
@@ -70,4 +73,24 @@ export const TurnBanner = styled.div`
     float: left;
     margin: 0 0.6vmin;
     vertical-align: middle;
+`
+
+export const NewsWrapper = styled.div`
+    width: 96%;
+    height: 24vmin;
+    margin: 0 2%;
+    border-bottom: 1px solid #d0cdcd;
+    position: relative;
+
+    img{
+        width: 30vmin;
+        position: absolute;
+        top: 1vmin;
+        right: 1vmin;
+    }
+`
+export const NewsTitle = styled.div`
+    padding: 1vmin;
+    width: 64%;
+    display: inline-block;
 `

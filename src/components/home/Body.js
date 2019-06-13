@@ -1,32 +1,46 @@
 import React, { Component } from 'react';
-import { Banner,Turn,TurnBanner } from './style'
+import { BodyWrapper, Banner,Turn,TurnBanner,NewsWrapper,NewsTitle } from './style'
 import { connect } from 'react-redux'
+import { actionCreators } from './store'
+import img from '../../images/1.jpg'
 
 class Body extends Component {
+
     render() {
-        const { curBanner, bannerList, mouseUp, mouseDown, mouseMove } = this.props
+        const { curBanner, bannerList, touchStart, touchEnd, newsList } = this.props
         const curBannerInfo = bannerList.find(banner=>{
             return banner.id === curBanner
         })
         return (
-            <Banner 
-                imageUrl={ curBannerInfo.img }
-                onMouseUp = { mouseUp }
-                onMouseDown = { mouseDown }
-                onMouseMove = { mouseMove }>
-                <Turn>
+            <BodyWrapper>
+                <Banner 
+                    imageUrl={ curBannerInfo.img }
+                    onTouchStart = { touchStart }
+                    onTouchEnd = { touchEnd }>
+                    <Turn>
+                    {
+                        bannerList.map(banner=>{
+                            return (
+                                <TurnBanner 
+                                    className={banner.id === curBanner ? 'banner-active' : ''}
+                                    key={banner.id}>
+                                </TurnBanner>
+                            )
+                        })
+                    }
+                    </Turn>
+                </Banner>
                 {
-                    bannerList.map(banner=>{
+                    newsList.map(news=>{
                         return (
-                            <TurnBanner 
-                                className={banner.id === curBanner ? 'banner-active' : ''}
-                                key={banner.id}>
-                            </TurnBanner>
+                            <NewsWrapper>
+                                <NewsTitle>{news.title}</NewsTitle>
+                                <img src={news.img} alt="" />
+                            </NewsWrapper>
                         )
                     })
                 }
-                </Turn>
-            </Banner>
+            </BodyWrapper>  
         );
     }
 }
@@ -34,20 +48,18 @@ class Body extends Component {
 const mapState = (state)=>{
     return {
         curBanner: state.home.curBanner,
-        bannerList: state.home.bannerList
+        bannerList: state.home.bannerList,
+        newsList: state.home.newsList
     }
 }
 
 const mapDispatch = (dispatch)=>{
     return {
-        mouseUp(e){
-            console.log('up' + e.target)
+        touchStart(e){
+            dispatch(actionCreators.setTouchStateX(e.touches[0].clientX))
         },
-        mouseDown(e){
-            console.log('down' + e.target)
-        },
-        mouseMove(e){
-            console.log('move' + e.target)
+        touchEnd(e){
+            dispatch(actionCreators.changeBanner(e.changedTouches[0].clientX))
         }
     }
 }
