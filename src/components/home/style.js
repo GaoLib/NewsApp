@@ -34,7 +34,7 @@ export const NavWrapper = styled.ul`
 `
 
 export const NavArrow = styled.div`
-    position:fixed;
+    position: absolute;
     right:0;
     top:16px;
     background: white;
