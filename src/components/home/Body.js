@@ -2,19 +2,20 @@ import React, { Component } from 'react';
 import { BodyWrapper, Banner,Turn,TurnBanner,NewsWrapper,NewsTitle } from './style'
 import { connect } from 'react-redux'
 import { actionCreators } from './store'
-import img from '../../images/1.jpg'
 
 class Body extends Component {
 
     render() {
-        const { curBanner, bannerList, touchStart, touchEnd, newsList } = this.props
+        const { curBanner, bannerList, touchStart, touchEnd, newsList, getImage } = this.props
         const curBannerInfo = bannerList.find(banner=>{
             return banner.id === curBanner
         })
+        console.log(curBannerInfo)
+        const image = curBannerInfo && getImage(curBannerInfo.img)
         return (
             <BodyWrapper>
                 <Banner 
-                    imageUrl={ curBannerInfo.img }
+                    imageUrl={ image }
                     onTouchStart = { touchStart }
                     onTouchEnd = { touchEnd }>
                     <Turn>
@@ -33,7 +34,7 @@ class Body extends Component {
                 {
                     newsList.map(news=>{
                         return (
-                            <NewsWrapper>
+                            <NewsWrapper key={news.id}>
                                 <NewsTitle>{news.title}</NewsTitle>
                                 <img src={news.img} alt="" />
                             </NewsWrapper>
@@ -60,6 +61,9 @@ const mapDispatch = (dispatch)=>{
         },
         touchEnd(e){
             dispatch(actionCreators.changeBanner(e.changedTouches[0].clientX))
+        },
+        getImage(url){
+            dispatch(actionCreators.getImage(url))
         }
     }
 }

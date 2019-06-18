@@ -1,8 +1,4 @@
 import * as actionTypes from './constants'
-import Banner1 from '../../../images/banner.jpg'
-import Banner2 from '../../../images/banner2.png'
-import Banner3 from '../../../images/banner3.png'
-import Banner4 from '../../../images/banner4.png'
 import News1 from '../../../images/1.jpg'
 import News2 from '../../../images/2.jpg'
 import News3 from '../../../images/3.jpg'
@@ -12,55 +8,9 @@ import News6 from '../../../images/6.jpg'
 
 const defaultState = {
     curTab: 1,
-    tabList: [
-        {
-            id: 1,
-            name: '推荐'
-        },
-        {
-            id: 2,
-            name: '热点'
-        },
-        {
-            id: 3,
-            name: '娱乐圈'
-        },
-        {
-            id: 4,
-            name: '笑点低'
-        },
-        {
-            id: 5,
-            name: '二次元'
-        },
-        {
-            id: 6,
-            name: '潮人范'
-        }
-    ],
+    tabList: [],
     curBanner: 1,
-    bannerList: [
-        {
-            id: 1,
-            link: '',
-            img: Banner1
-        },
-        {
-            id: 2,
-            link: '',
-            img: Banner2
-        },
-        {
-            id: 3,
-            link: '',
-            img: Banner3
-        },
-        {
-            id: 4,
-            link: '',
-            img: Banner4
-        }
-    ],
+    bannerList: [],
     touchStartX: 0,
     newsList: [
         {
@@ -98,6 +48,18 @@ const defaultState = {
 
 export default (state = defaultState, action)=>{
     switch(action.type){
+        case actionTypes.GET_TAB_LIST:
+            let tabs = []
+            action.data.forEach(tab=>{
+                tabs.push({
+                    id: tab.id,
+                    name: tab.name
+                })
+            })
+            return Object.assign({}, state, {
+                tabList: tabs,
+                bannerList: action.data[0].bannerList
+            })
         case actionTypes.CHOOSE_TAB:
             return Object.assign({}, state, {
                 curTab: action.data

@@ -2,14 +2,11 @@ import React, { Component } from 'react';
 import { NavWrapper, NavArrow} from './style'
 import { connect } from 'react-redux'
 import { actionCreators } from './store'
-import $ from 'jquery'
 
 class Header extends Component{
     
     componentDidMount(){
-        $.get('http://localhost:8888/getTabList',function(data){
-            console.log(data);
-        })  
+        this.props.getTabList()
     }
 
     render(){
@@ -43,6 +40,9 @@ const mapDispatch = (dispatch)=>{
     return {
         chooseTab(id){
             dispatch(actionCreators.chooseTab(id))
+        },
+        getTabList(){
+            dispatch(actionCreators.getTabList())
         }
     }
 }
