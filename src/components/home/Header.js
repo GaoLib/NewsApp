@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavWrapper, NavArrow} from './style'
+import { NavWrapper, NavArrow } from './style'
 import { connect } from 'react-redux'
 import { actionCreators } from './store'
 

@@ -5,17 +5,17 @@ import { actionCreators } from './store'
 
 class Body extends Component {
 
+    componentDidUpdate(){
+        const { curBanner, bannerList, getBannerImage } = this.props
+        // getBannerImage(bannerList[curBanner.id - 1].imgUrl)
+    }
+
     render() {
-        const { curBanner, bannerList, touchStart, touchEnd, newsList, getImage } = this.props
-        const curBannerInfo = bannerList.find(banner=>{
-            return banner.id === curBanner
-        })
-        console.log(curBannerInfo)
-        const image = curBannerInfo && getImage(curBannerInfo.img)
+        const { curBanner, bannerList, touchStart, touchEnd, newsList } = this.props
         return (
             <BodyWrapper>
                 <Banner 
-                    imageUrl={ image }
+                    imageUrl={ curBanner.img }
                     onTouchStart = { touchStart }
                     onTouchEnd = { touchEnd }>
                     <Turn>
@@ -23,7 +23,7 @@ class Body extends Component {
                         bannerList.map(banner=>{
                             return (
                                 <TurnBanner 
-                                    className={banner.id === curBanner ? 'banner-active' : ''}
+                                    className={banner.id === curBanner.id ? 'banner-active' : ''}
                                     key={banner.id}>
                                 </TurnBanner>
                             )
@@ -50,7 +50,7 @@ const mapState = (state)=>{
     return {
         curBanner: state.home.curBanner,
         bannerList: state.home.bannerList,
-        newsList: state.home.newsList
+        newsList: state.home.newsList,
     }
 }
 
@@ -62,8 +62,8 @@ const mapDispatch = (dispatch)=>{
         touchEnd(e){
             dispatch(actionCreators.changeBanner(e.changedTouches[0].clientX))
         },
-        getImage(url){
-            dispatch(actionCreators.getImage(url))
+        getBannerImage(url){
+            dispatch(actionCreators.getBannerImage(url))
         }
     }
 }

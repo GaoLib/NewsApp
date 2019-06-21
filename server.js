@@ -15,22 +15,54 @@ var _tabList = [
             {
                 id: 1,
                 link: '',
-                img: '/src/images/banner.jpg'
+                imgUrl: '/src/images/banner.jpg'
             },
             {
                 id: 2,
                 link: '',
-                img: '/src/images/banner2.png'
+                imgUrl: '/src/images/banner2.png'
             },
             {
                 id: 3,
                 link: '',
-                img: '/src/images/banner3.png'
+                imgUrl: '/src/images/banner3.png'
             },
             {
                 id: 4,
                 link: '',
-                img: '/src/images/banner4.png'
+                imgUrl: '/src/images/banner4.png'
+            }
+        ],
+        newsList: [
+            {
+                id: 1,
+                title: 'DJI 大疆 口袋灵眸 Osmo pocket 口袋云台相机 迷你手持云台相机',
+                imgUrl: '/src/images/1.jpg'
+            },
+            {
+                id: 2,
+                title: '米作',
+                imgUrl: '/src/images/2.jpg'
+            },
+            {
+                id: 3,
+                title: '好吃的',
+                imgUrl: '/src/images/3.jpg'
+            },
+            {
+                id: 4,
+                title: 'DJI 大疆 口袋灵眸 Osmo pocket 口袋云台相机 迷你手持云台相机',
+                imgUrl: '/src/images/4.jpg'
+            },
+            {
+                id: 5,
+                title: '米作',
+                imgUrl: '/src/images/5.jpg'
+            },
+            {
+                id: 6,
+                title: '好吃的',
+                imgUrl: '/src/images/6.jpg'
             }
         ]
     },

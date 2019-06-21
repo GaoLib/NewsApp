@@ -1,9 +1,38 @@
 import * as actionTypes from './constants'
 import axios from 'axios'
 
+const getImage = (url) => {
+    return new Promise((resolve,reject)=>{
+        axios.post('http://localhost:8888/getImage',{url},{ responseType: "arraybuffer" })
+        .then(res=>{
+            return (
+                "data:image/png;base64," +
+                btoa(
+                    new Uint8Array(res.data).reduce(
+                        (data, byte) =>
+                            data + String.fromCharCode(byte),
+                        ""
+                    )
+                )
+            );
+        })
+        .then(img=>{
+            resolve(img)
+        })
+        .catch(err=>{
+            reject(err)
+        })
+    })
+}
+
 const initTabList = (data) => ({
     type: actionTypes.GET_TAB_LIST,
     data
+})
+
+const setBannerImage = (img)=>({
+    type: actionTypes.SET_BANNER_IMAGE,
+    img
 })
 
 export const getTabList = () => {
@@ -11,7 +40,15 @@ export const getTabList = () => {
         axios.get('http://localhost:8888/getTabList')
         .then(res=>{
             if(res.status === 200){
-                dispatch(initTabList(res.data))
+                getImage(res.data[0].bannerList[0].imgUrl).then(
+                    img=>{
+                        let data = {
+                            tabList: res.data,
+                            curBannerImg: img
+                        }
+                        dispatch(initTabList(data))
+                    }
+                )
             }
         })
         .catch(err=>{
@@ -20,14 +57,11 @@ export const getTabList = () => {
     }
 }
 
-export const getImage = (url) => {
-    return ()=>{
-        axios.post('http://localhost:8888/getImage',{url})
+export const getBannerImage = (url) => {
+    return (dispatch)=>{
+        getImage(url)
         .then(res=>{
-            return res
-        })
-        .catch(err=>{
-            console.log(err)
+            dispatch(setBannerImage(res))
         })
     }
 } 

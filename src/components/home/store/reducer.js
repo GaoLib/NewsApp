@@ -9,7 +9,10 @@ import News6 from '../../../images/6.jpg'
 const defaultState = {
     curTab: 1,
     tabList: [],
-    curBanner: 1,
+    curBanner: {
+        id: 1,
+        img: null
+    },
     bannerList: [],
     touchStartX: 0,
     newsList: [
@@ -49,8 +52,8 @@ const defaultState = {
 export default (state = defaultState, action)=>{
     switch(action.type){
         case actionTypes.GET_TAB_LIST:
-            let tabs = []
-            action.data.forEach(tab=>{
+            let tabs = [], tabInfo = action.data
+            tabInfo.tabList.forEach(tab=>{
                 tabs.push({
                     id: tab.id,
                     name: tab.name
@@ -58,7 +61,11 @@ export default (state = defaultState, action)=>{
             })
             return Object.assign({}, state, {
                 tabList: tabs,
-                bannerList: action.data[0].bannerList
+                bannerList: tabInfo.tabList[0].bannerList,
+                curBanner: {
+                    id: tabInfo.tabList[0].bannerList[0].id,
+                    img: tabInfo.curBannerImg
+                }
             })
         case actionTypes.CHOOSE_TAB:
             return Object.assign({}, state, {
@@ -71,12 +78,22 @@ export default (state = defaultState, action)=>{
         case actionTypes.CHANGE_BANNER:
             let curBannerId
             if(action.data > state.touchStartX){
-                curBannerId = state.curBanner > 1 ? state.curBanner - 1 : state.bannerList.length
+                curBannerId = state.curBanner.id > 1 ? state.curBanner.id - 1 : state.bannerList.length
             } else {
-                curBannerId = state.curBanner < state.bannerList.length ? state.curBanner + 1 : 1
+                curBannerId = state.curBanner.id < state.bannerList.length ? state.curBanner.id + 1 : 1
             }
             return Object.assign({}, state, {
-               curBanner: curBannerId
+               curBanner: {
+                   id: curBannerId,
+                   img: state.curBanner.img
+               }
+            })
+        case actionTypes.SET_BANNER_IMAGE:
+            return Object.assign({}, state, {
+                curBanner: {
+                   img: action.img,
+                   id: state.curBanner.id
+                }
             })
         default:
             return state
