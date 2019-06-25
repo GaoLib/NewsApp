@@ -7,86 +7,8 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
-var _tabList = [
-    {
-        id: 1,
-        name: '推荐',
-        bannerList: [
-            {
-                id: 1,
-                link: '',
-                imgUrl: '/src/images/banner.jpg'
-            },
-            {
-                id: 2,
-                link: '',
-                imgUrl: '/src/images/banner2.png'
-            },
-            {
-                id: 3,
-                link: '',
-                imgUrl: '/src/images/banner3.png'
-            },
-            {
-                id: 4,
-                link: '',
-                imgUrl: '/src/images/banner4.png'
-            }
-        ],
-        newsList: [
-            {
-                id: 1,
-                title: 'DJI 大疆 口袋灵眸 Osmo pocket 口袋云台相机 迷你手持云台相机',
-                imgUrl: '/src/images/1.jpg'
-            },
-            {
-                id: 2,
-                title: '米作',
-                imgUrl: '/src/images/2.jpg'
-            },
-            {
-                id: 3,
-                title: '好吃的',
-                imgUrl: '/src/images/3.jpg'
-            },
-            {
-                id: 4,
-                title: 'DJI 大疆 口袋灵眸 Osmo pocket 口袋云台相机 迷你手持云台相机',
-                imgUrl: '/src/images/4.jpg'
-            },
-            {
-                id: 5,
-                title: '米作',
-                imgUrl: '/src/images/5.jpg'
-            },
-            {
-                id: 6,
-                title: '好吃的',
-                imgUrl: '/src/images/6.jpg'
-            }
-        ]
-    },
-    {
-        id: 2,
-        name: '热点'
-    },
-    {
-        id: 3,
-        name: '娱乐圈'
-    },
-    {
-        id: 4,
-        name: '笑点低'
-    },
-    {
-        id: 5,
-        name: '二次元'
-    },
-    {
-        id: 6,
-        name: '潮人范'
-    }
-]
+const getData = require('./database')
+const { _tabList } = getData()
 
 app.all('*', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");

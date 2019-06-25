@@ -30,9 +30,14 @@ const initTabList = (data) => ({
     data
 })
 
-const setBannerImage = (img)=>({
-    type: actionTypes.SET_BANNER_IMAGE,
-    img
+const setNewBanner = (banner) => ({
+    type: actionTypes.SET_NEW_BANNER,
+    banner
+})
+
+const setNewsImg = (news) => ({
+    type: actionTypes.SET_NEWS_IMG,
+    news
 })
 
 export const getTabList = () => {
@@ -57,26 +62,35 @@ export const getTabList = () => {
     }
 }
 
-export const getBannerImage = (url) => {
+export const changeBanner = (data) => {
     return (dispatch)=>{
-        getImage(url)
-        .then(res=>{
-            dispatch(setBannerImage(res))
-        })
+        getImage(data.imgUrl).then(
+            res=> {
+                let newBanner = {
+                    id: data.id,
+                    img: res
+                }
+                dispatch(setNewBanner(newBanner))
+            }
+        )
     }
-} 
+}
  
 export const chooseTab = (data)=>({
     type: actionTypes.CHOOSE_TAB,
     data
 })
 
-export const setTouchStateX = (data)=>({
-    type: actionTypes.SET_TOUCH_STATEX,
-    data
-})
-
-export const changeBanner = (data) => ({
-    type: actionTypes.CHANGE_BANNER,
-    data
-})
+export const getNewsImg = (id,url)=>{
+    return (dispatch) => {
+        getImage(url).then(
+            res=> {
+                let news = {
+                    id,
+                    img: res
+                }
+                dispatch(setNewsImg(news))
+            }
+        )
+    }
+}

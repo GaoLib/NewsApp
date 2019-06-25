@@ -5,19 +5,34 @@ import { actionCreators } from './store'
 
 class Body extends Component {
 
-    componentDidUpdate(){
-        const { curBanner, bannerList, getBannerImage } = this.props
-        // getBannerImage(bannerList[curBanner.id - 1].imgUrl)
+    constructor(props){
+        super(props)
+        this.state = {
+            touchStartX: 0
+        }
+        this.touchStart = this.touchStart.bind(this)
+        this.touchEnd = this.touchEnd.bind(this)
+    }
+
+    componentWillReceiveProps(nextProps){
+        const { newsList, getNewsImg } = this.props
+        const nextNewsList = nextProps.newsList
+       
+        nextNewsList.forEach((newItem, index) =>{
+            if(!newsList[index] || newsList[index].imgUrl !== newItem.imgUrl){
+                getNewsImg(newItem.id,newItem.imgUrl)
+            }
+        })
     }
 
     render() {
-        const { curBanner, bannerList, touchStart, touchEnd, newsList } = this.props
+        const { curBanner, bannerList, newsList } = this.props
         return (
             <BodyWrapper>
                 <Banner 
                     imageUrl={ curBanner.img }
-                    onTouchStart = { touchStart }
-                    onTouchEnd = { touchEnd }>
+                    onTouchStart = { this.touchStart }
+                    onTouchEnd = { this.touchEnd }>
                     <Turn>
                     {
                         bannerList.map(banner=>{
@@ -44,26 +59,44 @@ class Body extends Component {
             </BodyWrapper>  
         );
     }
+
+    touchStart(e){
+        this.setState({
+            touchStartX: e.touches[0].clientX
+        })
+    }
+
+    touchEnd(e){
+        let endX = e.changedTouches[0].clientX, newBannerId, newBanner
+        const { curBanner, bannerList, changeBanner } = this.props
+        if(endX > this.state.touchStartX){
+            newBannerId = curBanner.id > 1 ? curBanner.id - 1 : bannerList.length
+        } else {
+            newBannerId = curBanner.id < bannerList.length ? curBanner.id + 1 : 1
+        }
+        newBanner = {
+            id: newBannerId,
+            imgUrl: bannerList.find(banner=>{ return banner.id === newBannerId }).imgUrl
+        }
+        changeBanner(newBanner)
+    }
 }
 
 const mapState = (state)=>{
     return {
         curBanner: state.home.curBanner,
         bannerList: state.home.bannerList,
-        newsList: state.home.newsList,
+        newsList: state.home.newsList
     }
 }
 
 const mapDispatch = (dispatch)=>{
     return {
-        touchStart(e){
-            dispatch(actionCreators.setTouchStateX(e.touches[0].clientX))
+        changeBanner(newBanner){
+            dispatch(actionCreators.changeBanner(newBanner))
         },
-        touchEnd(e){
-            dispatch(actionCreators.changeBanner(e.changedTouches[0].clientX))
-        },
-        getBannerImage(url){
-            dispatch(actionCreators.getBannerImage(url))
+        getNewsImg(id,url){
+            dispatch(actionCreators.getNewsImg(id,url))
         }
     }
 }
