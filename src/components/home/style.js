@@ -1,5 +1,15 @@
 import styled from 'styled-components'
 
+export const ContentWrapper = styled.div`
+    height: 99.2vh;
+    overflow: auto;
+    
+    &::-webkit-scrollbar {
+        width: 0.2vmin;
+        height: 100%;
+    }
+`
+
 export const NavWrapper = styled.ul`
     width: 90%;
     padding: 0;
@@ -81,16 +91,48 @@ export const NewsWrapper = styled.div`
     margin: 0 2%;
     border-bottom: 1px solid #d0cdcd;
     position: relative;
-
-    img{
-        width: 30vmin;
-        position: absolute;
-        top: 1vmin;
-        right: 1vmin;
-    }
+    cursor: pointer;
 `
+export const NewsPhoto = styled.img.attrs({
+    src: props => props.src
+})`
+    width: 30vmin;
+    position: absolute;
+    top: 1vmin;
+    right: 1vmin;
+`
+
 export const NewsTitle = styled.div`
     padding: 1vmin;
     width: 64%;
     display: inline-block;
+    color: #333;
 `
+export const Interest = styled.i`
+    position: absolute;
+    bottom: 0;
+    left: 58%;
+    color: ${props => props.color}
+`
+
+export const DetailHeader = styled.div`
+    height: 8vmin;
+    padding: 2vmin;
+    border-bottom: 1px solid #bbb;
+    position: relative;
+`
+
+export const BackToHome = styled.div`
+    position: absolute;
+    left: 4vmin;
+    top: 3vmin;
+`
+
+export const DetailContent = styled.div`
+    padding: 2vmin;
+`
+
+export const DetailTitle = styled.div`
+    font-size: 4.8vmin;
+`
+

@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import Account from'../../../images/account.svg';
-import HomePage from '../../../images/home-active.svg';
+import { FooterWrapper,IconWrapper } from './style'
 
 export default class Footer extends Component{
     render(){
         return (
-            <div className="footer">
-                <NavLink to="/"><img src={HomePage} className="icon" alt="Home"/></NavLink>
-                <NavLink to="/account"><img src={Account} className="icon" alt="Account"/></NavLink>
-            </div>
+            <FooterWrapper>
+                <NavLink to="/">
+                    <IconWrapper className="iconfont" color="#f5ef3e">&#xe690;</IconWrapper>
+                </NavLink>
+                <NavLink to="/account">
+                    <IconWrapper className="iconfont" color="#aaa">&#xe613;</IconWrapper>
+                </NavLink>
+            </FooterWrapper>
         );
     }
 

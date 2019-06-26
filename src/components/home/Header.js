@@ -6,7 +6,10 @@ import { actionCreators } from './store'
 class Header extends Component{
     
     componentDidMount(){
-        this.props.getTabList()
+        const { newsList, getTabList } = this.props
+        if(!newsList.length){
+            getTabList()
+        }
     }
 
     render(){
@@ -32,7 +35,8 @@ class Header extends Component{
 const mapState = (state)=>{
     return {
         curTab: state.home.curTab,
-        tabList: state.home.tabList
+        tabList: state.home.tabList,
+        newsList: state.home.newsList
     }
 }
 

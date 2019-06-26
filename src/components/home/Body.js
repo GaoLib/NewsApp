@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { BodyWrapper, Banner,Turn,TurnBanner,NewsWrapper,NewsTitle } from './style'
+import { BodyWrapper, Banner,Turn,TurnBanner,NewsWrapper,NewsTitle,NewsPhoto,Interest } from './style'
 import { connect } from 'react-redux'
 import { actionCreators } from './store'
+import { NavLink } from 'react-router-dom';
 
 class Body extends Component {
 
@@ -17,7 +18,7 @@ class Body extends Component {
     componentWillReceiveProps(nextProps){
         const { newsList, getNewsImg } = this.props
         const nextNewsList = nextProps.newsList
-       
+        
         nextNewsList.forEach((newItem, index) =>{
             if(!newsList[index] || newsList[index].imgUrl !== newItem.imgUrl){
                 getNewsImg(newItem.id,newItem.imgUrl)
@@ -49,10 +50,16 @@ class Body extends Component {
                 {
                     newsList.map(news=>{
                         return (
-                            <NewsWrapper key={news.id}>
-                                <NewsTitle>{news.title}</NewsTitle>
-                                <img src={news.img} alt="" />
-                            </NewsWrapper>
+                            <NavLink to="/detail">
+                                <NewsWrapper key={news.id}>
+                                    <NewsTitle>{news.title}</NewsTitle>
+                                    <NewsPhoto src={news.img} alt=""></NewsPhoto>
+                                    {
+                                        news.interested ? <Interest className="iconfont" color="#de513f">&#xe635;</Interest>
+                                        : <Interest className="iconfont" color="#333333">&#xe602;</Interest>
+                                    }
+                                </NewsWrapper>
+                            </NavLink>
                         )
                     })
                 }
