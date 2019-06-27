@@ -93,9 +93,9 @@ export const NewsWrapper = styled.div`
     position: relative;
     cursor: pointer;
 `
-export const NewsPhoto = styled.img.attrs({
+export const NewsPhoto = styled.img.attrs(props=>({
     src: props => props.src
-})`
+}))`
     width: 30vmin;
     position: absolute;
     top: 1vmin;
@@ -135,4 +135,19 @@ export const DetailContent = styled.div`
 export const DetailTitle = styled.div`
     font-size: 4.8vmin;
 `
+export const DetailTime = styled.div`
+    font-size: 2vmin;
+    color: #aaa;
+    margin: 2vmin;
+`
 
+export const DetailArticle = styled.div`
+    padding: 2vmin;
+    height: 132vmin;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar{
+        width: 0.2vmin;
+        height: 100%;
+    }
+`

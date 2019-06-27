@@ -8,7 +8,8 @@ const defaultState = {
         img: null
     },
     bannerList: [],
-    newsList: []
+    newsList: [],
+    curNews: {}
 }
 
 export default (state = defaultState, action)=>{
@@ -44,6 +45,13 @@ export default (state = defaultState, action)=>{
             let newState = JSON.parse(JSON.stringify(state))
             newState.newsList[curNewsIndex].img = action.news.img
             return newState
+        case actionTypes.SET_CUR_NEWS:
+            let curNews = state.newsList.find(news=>{
+                return news.id === action.newsId
+            })
+            return Object.assign({}, state, {
+                curNews
+            })
         default:
             return state
     }

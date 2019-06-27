@@ -27,7 +27,7 @@ class Body extends Component {
     }
 
     render() {
-        const { curBanner, bannerList, newsList } = this.props
+        const { curBanner, bannerList, newsList, getNewsDetail } = this.props
         return (
             <BodyWrapper>
                 <Banner 
@@ -50,8 +50,8 @@ class Body extends Component {
                 {
                     newsList.map(news=>{
                         return (
-                            <NavLink to="/detail">
-                                <NewsWrapper key={news.id}>
+                            <NavLink to="/detail" key={news.id} onClick={()=>getNewsDetail(news.id)}>
+                                <NewsWrapper>
                                     <NewsTitle>{news.title}</NewsTitle>
                                     <NewsPhoto src={news.img} alt=""></NewsPhoto>
                                     {
@@ -104,6 +104,9 @@ const mapDispatch = (dispatch)=>{
         },
         getNewsImg(id,url){
             dispatch(actionCreators.getNewsImg(id,url))
+        },
+        getNewsDetail(id){
+            dispatch(actionCreators.setCurNews(id))
         }
     }
 }

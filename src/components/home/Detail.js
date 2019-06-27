@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { DetailHeader, BackToHome, DetailTitle,DetailContent } from './style'
+import { DetailHeader, BackToHome, DetailTitle,DetailContent,DetailTime,DetailArticle } from './style'
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux'
 
-export default class Detail extends Component{
+class Detail extends Component{
    
     render(){
+        const { curNews } = this.props
         return (
             <div>
                 <DetailHeader>
@@ -13,10 +15,26 @@ export default class Detail extends Component{
                     </NavLink>
                 </DetailHeader>
                 <DetailContent>
-                    <DetailTitle>大惊喜！魔都竟藏着古都“洛阳城”？！一笼「资深汤包」火了16年!</DetailTitle>
+                    <DetailTitle>{ curNews.title }</DetailTitle>
+                    <DetailTime>{ curNews.time }</DetailTime>
+                    <DetailArticle>{ curNews.content }</DetailArticle>
                 </DetailContent>
             </div>
         );
     }
-
 }
+
+const mapProps = (state) => {
+    return {
+        curNews: state.home.curNews
+    }
+}
+
+const mapDispatch = (dispatch) => {
+    return {
+
+    }
+}
+
+export default connect(mapProps,mapDispatch)(Detail)
+

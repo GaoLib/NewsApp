@@ -94,3 +94,8 @@ export const getNewsImg = (id,url)=>{
         )
     }
 }
+
+export const setCurNews = (newsId)=>({
+    type: actionTypes.SET_CUR_NEWS,
+    newsId
+})
