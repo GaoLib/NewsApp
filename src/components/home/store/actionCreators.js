@@ -99,3 +99,8 @@ export const setCurNews = (newsId)=>({
     type: actionTypes.SET_CUR_NEWS,
     newsId
 })
+
+export const changeInterested = () => ({
+    type: actionTypes.CHANGE_INTERESTED,
+    data: ''
+})

@@ -6,6 +6,7 @@ import { GlobalIconStyle } from './statics/iconfont/iconfont'
 import Account from './components/account/index';
 import Home from './components/home'
 import Detail from './components/home/Detail'
+import Login from './components/account/Login'
 import store from './store'
 import { Provider } from 'react-redux'
 
@@ -16,6 +17,7 @@ ReactDOM.render(
                 <Route path="/" exact component={Home}/>
                 <Route path="/account" exact component={Account}/>
                 <Route path="/detail" exact component={Detail} />
+                <Route path="/login" exact component={Login} />
             </Switch>
         </BrowserRouter>
         <GlobalStyle />
