@@ -128,13 +128,6 @@ export const BackToHome = styled.div`
     top: 3vmin;
 `
 
-export const Collect = styled.div`
-    position: absolute;
-    right: 4vmin;
-    top: 4vmin;
-    color: ${props => props.color}
-`
-
 export const DetailContent = styled.div`
     padding: 2vmin;
 `

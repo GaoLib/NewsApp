@@ -39,21 +39,19 @@ export default (state = defaultState, action)=>{
                 }
             })
         case actionTypes.SET_NEWS_IMG:
-            let curNewsIndex = state.newsList.findIndex(news=>news.id === action.news.id)
+            let curNewsIndex = state.newsList.findIndex(news=>{
+                return news.id === action.news.id
+            })
             let newState = JSON.parse(JSON.stringify(state))
             newState.newsList[curNewsIndex].img = action.news.img
             return newState
         case actionTypes.SET_CUR_NEWS:
-            let curNews = state.newsList.find(news=>news.id === action.newsId)
+            let curNews = state.newsList.find(news=>{
+                return news.id === action.newsId
+            })
             return Object.assign({}, state, {
                 curNews
             })
-        case actionTypes.CHANGE_INTERESTED:
-            let newState1 = JSON.parse(JSON.stringify(state))
-            newState1.curNews.interested = !newState1.curNews.interested
-            let news = newState1.newsList.find(news=> news.id === newState1.curNews.id)
-            news.interested = !news.interested
-            return newState1
         default:
             return state
     }
