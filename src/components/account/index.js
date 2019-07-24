@@ -17,7 +17,7 @@ class Account extends Component{
                     <NavLink to="/login">
                         <Profile>
                             <i className="iconfont">&#xe639;</i>
-                            <span>{ loginFlag ? userName : '点击登录' }</span>
+                            <span>{ loginFlag === 'in'? userName : '点击登录' }</span>
                         </Profile>
                         <TurnToLogin>></TurnToLogin>
                     </NavLink>

@@ -18,6 +18,12 @@ class Login extends Component{
         this.submit = this.submit.bind(this)
     }
 
+    componentDidUpdate(prevProps, prevState){
+        if(this.props.loginFlag === 'in'){
+            this.props.history.push('/')
+        }
+    }
+
     render(){
         const { loginFlag } = this.props
         return (
@@ -30,9 +36,11 @@ class Login extends Component{
                 <Form>
                     <Input placeholder="请输入用户名" onBlur={ this.handleUsername }></Input>
                     <Input placeholder="请输入密码" onBlur={ this.handlePassword }></Input>
-                    <ErrorMessage>{this.state.errorMessage}</ErrorMessage>
+                    <ErrorMessage>{this.state.errorMessage ? this.state.errorMessage : 
+                        (loginFlag === 'error' ? '用户名或密码错误' : null) }
+                    </ErrorMessage>
                     <Button onClick={this.submit}>
-                        { loginFlag ? '更换账号' : '登录'}
+                        { loginFlag === 'in' ? '更换账号' : '登录'}
                     </Button>
                 </Form>
             </div>
