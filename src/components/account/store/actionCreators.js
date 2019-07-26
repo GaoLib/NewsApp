@@ -1,9 +1,9 @@
 import * as actionTypes from './constants'
 import axios from 'axios'
 
-const loginSuccess = (username) => ({
+const loginSuccess = (account) => ({
     type: actionTypes.LOGINSUCCESS,
-    username
+    account
 })
 
 const loginFail = () => ({
@@ -14,8 +14,8 @@ export const login = (account)=>{
     return (dispatch) => {
         axios.post('http://localhost:8888/login',account).then(
             res=> {
-                if(res.data === 'success'){
-                    dispatch(loginSuccess(account.user))
+                if(res.data){
+                    dispatch(loginSuccess(res.data))
                 } else { 
                     dispatch(loginFail())
                 }

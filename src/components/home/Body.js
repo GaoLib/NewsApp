@@ -27,7 +27,11 @@ class Body extends Component {
     }
 
     render() {
-        const { curBanner, bannerList, newsList, getNewsDetail } = this.props
+        const { curBanner, bannerList, newsList, accountInfo, getNewsDetail } = this.props
+        newsList.forEach(news=>{
+            news.interested = ~accountInfo.interestedList.indexOf(news.id) ? true : false
+        })
+        
         return (
             <BodyWrapper>
                 <Banner 
@@ -93,7 +97,8 @@ const mapState = (state)=>{
     return {
         curBanner: state.home.curBanner,
         bannerList: state.home.bannerList,
-        newsList: state.home.newsList
+        newsList: state.home.newsList,
+        accountInfo: state.account.accountInfo
     }
 }
 

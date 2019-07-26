@@ -19,8 +19,8 @@ class Login extends Component{
     }
 
     componentDidUpdate(prevProps, prevState){
-        const {loginFlag,userName} = this.props
-        if((prevProps.loginFlag !== 'in' && loginFlag === 'in') || userName !== prevProps.userName ){
+        const {loginFlag,accountInfo} = this.props
+        if((prevProps.loginFlag !== 'in' && loginFlag === 'in') || accountInfo.username !== prevProps.accountInfo.username){
             this.props.history.push('/account')
         }
     }
@@ -75,7 +75,7 @@ class Login extends Component{
 const mapState = (state) => {
     return {
         loginFlag: state.account.loginFlag,
-        userName: state.account.userName
+        accountInfo: state.account.accountInfo
     }
 }
 

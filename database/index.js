@@ -493,12 +493,16 @@ module.exports = () => {
         ],
         _accounts: [
             {
+                id: 1,
                 username: 'Missy',
-                password: '897576'
+                password: '897576',
+                interestedList: [5,6,7,8,12,13,14,17,18,19,24,25,30,32]
             },
             {
+                id: 2,
                 username: 'JoJo',
-                password: '952781'
+                password: '952781',
+                interestedList: [10,14,16,18,19,24,26,30,34]
             }
         ]
     }

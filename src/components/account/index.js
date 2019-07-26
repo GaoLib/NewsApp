@@ -10,14 +10,14 @@ import { NavLink } from 'react-router-dom';
 
 class Account extends Component{
     render(){
-        const { loginFlag,userName } = this.props
+        const { loginFlag,accountInfo } = this.props
         return (
             <div>
                 <AccountWrapper>
                     <NavLink to="/login">
                         <Profile>
                             <i className="iconfont">&#xe639;</i>
-                            <span>{ loginFlag === 'in'? userName : '点击登录' }</span>
+                            <span>{ loginFlag === 'in'? accountInfo.username : '点击登录' }</span>
                         </Profile>
                         <TurnToLogin>></TurnToLogin>
                     </NavLink>
@@ -40,7 +40,7 @@ class Account extends Component{
 const mapState = (state) => {
     return {
         loginFlag: state.account.loginFlag,
-        userName: state.account.userName
+        accountInfo: state.account.accountInfo
     }
 }
 

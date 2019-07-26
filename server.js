@@ -29,10 +29,10 @@ app.post('/getImage',(req,res) => {
 
 app.post('/login',(req,res) => {
     const { user,pass } = req.body
-    let data = 'fail'
+    let data = null
     _accounts.forEach(account=>{
         if(account.username === user && account.password === pass){
-            data = 'success'
+            data = account
         }
     })
     

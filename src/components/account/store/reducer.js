@@ -2,14 +2,18 @@ import * as actionTypes from './constants'
 
 const defaultState = {
     loginFlag: 'out',
-    userName: null
+    accountInfo: {
+        id: 0,
+        username: null,
+        interestedList: []
+    }
 }
 
 export default (state=defaultState,action)=>{
     switch(action.type){
         case actionTypes.LOGINSUCCESS:
             return Object.assign({},state,{
-                userName: action.username,
+                accountInfo: action.account,
                 loginFlag: 'in'
             })
         case actionTypes.LOGINFAIL:
