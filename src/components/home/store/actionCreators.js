@@ -1,4 +1,5 @@
 import * as actionTypes from './constants'
+import { actionTypes as accountActionTypes }  from '../../account/store'
 import axios from 'axios'
 
 const getImage = (url) => {
@@ -38,6 +39,16 @@ const setNewBanner = (banner) => ({
 const setNewsImg = (news) => ({
     type: actionTypes.SET_NEWS_IMG,
     news
+})
+
+const changeInterested = () => ({
+    type: actionTypes.CHANGE_INTERESTED,
+    data: ''
+})
+
+const changeInterestedList = (list) => ({
+    type: accountActionTypes.CHANGEINTERESTLIST,
+    list
 })
 
 export const getTabList = () => {
@@ -100,7 +111,17 @@ export const setCurNews = (newsId)=>({
     newsId
 })
 
-export const changeInterested = () => ({
-    type: actionTypes.CHANGE_INTERESTED,
-    data: ''
-})
+export const handleInterestedList = (params) => {
+    return (dispatch)=>{
+        axios.post('http://localhost:8888/changeInterest',params)
+        .then(res=>{
+            if(res.data !== 'fail'){
+                dispatch(changeInterested())
+                dispatch(changeInterestedList(res.data))
+            }
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
+}

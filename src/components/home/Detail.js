@@ -7,7 +7,7 @@ import { actionCreators } from './store'
 class Detail extends Component{
    
     render(){
-        const { curNews,handleInterested } = this.props
+        const { curNews,accountInfo,handleInterested } = this.props
         return (
             <div>
                 <DetailHeader>
@@ -15,8 +15,10 @@ class Detail extends Component{
                         <BackToHome><i className="iconfont">&#xe609;</i></BackToHome>
                     </NavLink>
                     {
-                        curNews.interested ? <Collect className="iconfont" color="#de513f" onClick={handleInterested}>&#xe635;</Collect>
-                                : <Collect className="iconfont" color="#333333"  onClick={handleInterested}>&#xe602;</Collect>
+                        curNews.interested ? <Collect className="iconfont" color="#de513f" 
+                        onClick={()=>handleInterested(accountInfo.id,curNews.id,false)}>&#xe635;</Collect>
+                                : <Collect className="iconfont" color="#333333"  
+                                onClick={()=>handleInterested(accountInfo.id,curNews.id,true)}>&#xe602;</Collect>
                     }
                 </DetailHeader>
                 <DetailContent>
@@ -31,14 +33,20 @@ class Detail extends Component{
 
 const mapProps = (state) => {
     return {
-        curNews: state.home.curNews
+        curNews: state.home.curNews,
+        accountInfo: state.account.accountInfo
     }
 }
 
 const mapDispatch = (dispatch) => {
     return {
-        handleInterested(){
-            dispatch(actionCreators.changeInterested())
+        handleInterested(accountId,newsId,state){
+            let params = {
+                accountId,
+                newsId,
+                state
+            }
+            dispatch(actionCreators.handleInterestedList(params))
         }
     }
 }

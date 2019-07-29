@@ -51,8 +51,6 @@ export default (state = defaultState, action)=>{
         case actionTypes.CHANGE_INTERESTED:
             let newState1 = JSON.parse(JSON.stringify(state))
             newState1.curNews.interested = !newState1.curNews.interested
-            let news = newState1.newsList.find(news=> news.id === newState1.curNews.id)
-            news.interested = !news.interested
             return newState1
         default:
             return state

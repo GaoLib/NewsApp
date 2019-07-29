@@ -39,6 +39,26 @@ app.post('/login',(req,res) => {
     res.send(data)
 })
 
+app.post('/changeInterest',(req,res) => {
+    const {accountId,newsId,state} = req.body
+    let curAcc = _accounts.find(account=>{
+        return account.id === accountId
+    })
+    let data
+    if(curAcc){
+        if(state){
+            curAcc.interestedList.push(newsId)
+        } else {
+            let index = curAcc.interestedList.indexOf(newsId)
+            ~index && curAcc.interestedList.splice(index,1)
+        }
+        data = curAcc.interestedList
+    } else {
+        data = 'fail'
+    }
+    res.send(data)
+})
+
 app.listen(8888,function(){
     console.log('listening on :8888');
 });

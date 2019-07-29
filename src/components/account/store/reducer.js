@@ -20,6 +20,10 @@ export default (state=defaultState,action)=>{
             return Object.assign({},state,{
                 loginFlag: 'error'
             })
+        case actionTypes.CHANGEINTERESTLIST:
+            let newState1 = JSON.parse(JSON.stringify(state))
+            newState1.accountInfo.interestedList = action.list
+            return newState1
         default:
             return state
     }
